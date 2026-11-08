@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #f7f7f5;
+  --ink: #171717;
+  --muted: #777772;
+  --line: #deded9;
+  --page: min(1440px, calc(100% - 64px));
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "DM Sans", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+.site-header {
+  width: var(--page);
+  margin: 0 auto;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.wordmark { font-size: 15px; font-weight: 600; letter-spacing: -.04em; }
+nav { display: flex; gap: 28px; }
+nav a, .eyebrow, .section-heading, .site-footer, .contact-copy a {
+  font-size: 10px;
+  letter-spacing: .09em;
+  font-weight: 500;
+}
+nav a { transition: opacity .2s; }
+nav a:hover, .contact-copy a:hover { opacity: .5; }
+main { width: var(--page); margin: 0 auto; }
+.intro { padding: clamp(76px, 12vw, 170px) 0 100px; max-width: 720px; }
+.eyebrow { color: var(--muted); margin: 0 0 24px; }
+h1 { font-size: clamp(48px, 8vw, 112px); line-height: .95; letter-spacing: -.075em; font-weight: 400; margin: 0; }
+h1 span { color: #9b9b93; }
+.intro-copy { max-width: 360px; color: #666660; font-size: 14px; line-height: 1.65; margin: 26px 0 0; }
+.work-section { padding-bottom: 130px; }
+.section-heading { display: flex; justify-content: space-between; color: var(--muted); border-top: 1px solid var(--line); padding: 14px 0 22px; }
+.gallery { columns: 3; column-gap: 14px; }
+.photo-card { display: block; width: 100%; margin: 0 0 14px; padding: 0; border: 0; background: transparent; cursor: zoom-in; break-inside: avoid; text-align: left; }
+.photo-card img { display: block; width: 100%; height: auto; background: #e8e8e4; transition: opacity .25s ease; }
+.photo-card:hover img { opacity: .86; }
+.photo-caption { display: flex; justify-content: space-between; gap: 12px; padding-top: 8px; color: var(--muted); font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
+.empty-state { padding: 60px 0; color: var(--muted); line-height: 1.7; }
+code { background: #eaeae6; padding: 2px 5px; color: var(--ink); }
+.about-section, .contact-section { padding: 0 0 130px; }
+.about-copy { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; padding-top: 12px; }
+.about-copy h2 { font-size: clamp(30px, 4vw, 52px); font-weight: 400; letter-spacing: -.06em; margin: 0; }
+.about-copy p, .contact-copy p { max-width: 520px; margin: 4px 0 0; font-size: 15px; line-height: 1.75; color: #555550; }
+.contact-copy { padding-top: 12px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 20px 34px; }
+.contact-copy p { flex-basis: 100%; }
+.contact-copy a { border-bottom: 1px solid var(--ink); padding-bottom: 4px; }
+.site-footer { width: var(--page); margin: 0 auto; border-top: 1px solid var(--line); padding: 18px 0 24px; display: flex; justify-content: space-between; color: var(--muted); }
+.lightbox { border: 0; padding: 54px 70px 24px; max-width: 96vw; max-height: 96vh; background: rgba(247,247,245,.98); color: var(--ink); }
+.lightbox::backdrop { background: rgba(15,15,15,.92); }
+.lightbox img { display: block; max-width: min(78vw, 1200px); max-height: 78vh; width: auto; height: auto; margin: auto; }
+.lightbox-close, .lightbox-prev, .lightbox-next { position: absolute; border: 0; background: transparent; color: var(--ink); cursor: pointer; font: inherit; }
+.lightbox-close { top: 18px; right: 22px; font-size: 10px; letter-spacing: .1em; }
+.lightbox-prev, .lightbox-next { top: 50%; font-size: 24px; padding: 12px; }
+.lightbox-prev { left: 12px; } .lightbox-next { right: 12px; }
+#lightbox-caption { text-align: center; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; margin: 14px 0 0; }
+@media (max-width: 800px) {
+  :root { --page: calc(100% - 36px); }
+  .gallery { columns: 2; column-gap: 9px; }
+  .photo-card { margin-bottom: 9px; }
+  .about-copy { grid-template-columns: 1fr; gap: 16px; }
+  .intro { padding-bottom: 76px; }
+  .work-section, .about-section, .contact-section { padding-bottom: 90px; }
+}
+@media (max-width: 480px) {
+  .site-header { min-height: 64px; }
+  nav { gap: 13px; }
+  nav a { font-size: 9px; }
+  .gallery { columns: 1; }
+  .lightbox { padding: 50px 16px 20px; }
+  .lightbox img { max-width: 88vw; }
+  .site-footer { gap: 10px; flex-wrap: wrap; font-size: 9px; }
+}

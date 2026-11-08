@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tony Dang — analog photographer based in Prague, Czech Republic.">
+  <meta name="theme-color" content="#f7f7f5">
+  <title>Tony Dang — Photographer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="photos.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Tony Dang, home">TONY DANG</a>
+    <nav aria-label="Main navigation">
+      <a href="#work">WORK</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="intro" aria-label="Introduction">
+      <p class="eyebrow">PHOTOGRAPHER · PRAGUE, CZECH REPUBLIC</p>
+      <h1>Selected work<span>.</span></h1>
+      <p class="intro-copy">Analog photography focused on fashion, portraiture and documentary imagery.</p>
+    </section>
+
+    <section id="work" class="work-section" aria-label="Selected photographs">
+      <div class="section-heading">
+        <span>SELECTED WORK</span>
+        <span id="photo-count">—</span>
+      </div>
+      <div id="gallery" class="gallery"></div>
+      <p id="empty-state" class="empty-state" hidden>
+        Your photographs will appear here. Add image files to the <code>images</code> folder
+        and list them in <code>photos.js</code>.
+      </p>
+    </section>
+
+    <section id="about" class="about-section">
+      <div class="section-heading"><span>ABOUT</span></div>
+      <div class="about-copy">
+        <h2>Tony Dang</h2>
+        <p>Photographer based in Prague, Czech Republic. Working exclusively with analog photography, with a focus on fashion, portraiture and the atmosphere surrounding people and places.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="section-heading"><span>CONTACT</span></div>
+      <div class="contact-copy">
+        <p>For commissions, collaborations and inquiries.</p>
+        <a href="mailto:hello@tonydang.com">EMAIL</a>
+        <a href="https://www.instagram.com/tondyno/" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>TONY DANG</span>
+    <span>PRAGUE · CZECH REPUBLIC</span>
+    <span>© <span id="year"></span></span>
+  </footer>
+
+  <dialog id="lightbox" class="lightbox" aria-label="Photograph preview">
+    <button class="lightbox-close" type="button" aria-label="Close preview">CLOSE ×</button>
+    <button class="lightbox-prev" type="button" aria-label="Previous photograph">←</button>
+    <img id="lightbox-image" src="" alt="">
+    <button class="lightbox-next" type="button" aria-label="Next photograph">→</button>
+    <p id="lightbox-caption"></p>
+  </dialog>
+</body>
+</html>
