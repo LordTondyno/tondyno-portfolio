@@ -7,5 +7,5 @@
   Název souboru musí přesně odpovídat názvu nahraného souboru.
 */
 window.PORTFOLIO_PHOTOS = [
-  // { src: "images/upraveno.jpg", title: "ema", year: "2026" },
+   { src: "images/upraveno.jpg", title: "ema", year: "2026" },
 ];
