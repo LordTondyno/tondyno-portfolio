@@ -8,5 +8,4 @@
 */
 window.PORTFOLIO_PHOTOS = [
   // { src: "images/upraveno.jpg", title: "ema", year: "2026" },
-  // { src: "images/photo-02.jpg", title: "Backstage", year: "2025" },
 ];
