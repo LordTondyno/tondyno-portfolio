@@ -84,3 +84,75 @@ code { background: #eaeae6; padding: 2px 5px; color: var(--ink); }
   .lightbox img { max-width: 88vw; }
   .site-footer { gap: 10px; flex-wrap: wrap; font-size: 9px; }
 }
+
+
+/* DARK THEME — TONY DANG */
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background: #080808;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080808;
+  color: #f2f2f0;
+}
+
+.site-header,
+.site-footer {
+  background: #080808;
+  color: #f2f2f0;
+  border-color: #292929;
+}
+
+a {
+  color: #f2f2f0;
+}
+
+a:hover {
+  color: #999999;
+}
+
+.eyebrow,
+.section-heading,
+.empty-state,
+.site-footer,
+.intro-copy {
+  color: #999999;
+}
+
+.intro h1,
+.about-copy h2,
+.about-copy p,
+.contact-copy p {
+  color: #f2f2f0;
+}
+
+.section-heading {
+  border-color: #292929;
+}
+
+.gallery img {
+  background: #151515;
+}
+
+.lightbox {
+  background: #080808;
+  color: #f2f2f0;
+  border: 1px solid #292929;
+}
+
+.lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.96);
+}
+
+.lightbox button {
+  color: #f2f2f0;
+  background: transparent;
+  border-color: #444444;
+}
+
