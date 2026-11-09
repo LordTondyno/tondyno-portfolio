@@ -57,3 +57,33 @@
     if (event.key === "ArrowRight") showPhoto(activeIndex + 1);
   });
 })();
+
+
+/* SCROLL REVEAL */
+
+const gallery = document.querySelector("#gallery");
+
+if (gallery) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12
+  });
+
+  const observePhotos = () => {
+    gallery.querySelectorAll(":scope > *:not(.is-visible)")
+      .forEach((photo) => observer.observe(photo));
+  };
+
+  observePhotos();
+
+  new MutationObserver(observePhotos).observe(gallery, {
+    childList: true
+  });
+}
+
