@@ -87,3 +87,39 @@ if (gallery) {
   });
 }
 
+
+/* ==================================
+   TONY DANG — SCROLL REVEAL
+================================== */
+
+const gallery = document.querySelector("#gallery");
+
+if (gallery && "IntersectionObserver" in window) {
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: "0px 0px 40px 0px"
+  });
+
+  const observePhotos = () => {
+    gallery.querySelectorAll(":scope > *:not(.is-visible)")
+      .forEach((photo) => observer.observe(photo));
+  };
+
+  observePhotos();
+
+  new MutationObserver(observePhotos).observe(gallery, {
+    childList: true
+  });
+
+} else if (gallery) {
+  gallery.querySelectorAll(":scope > *")
+    .forEach((photo) => photo.classList.add("is-visible"));
+}
