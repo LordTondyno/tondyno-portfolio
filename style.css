@@ -156,3 +156,27 @@ a:hover {
   border-color: #444444;
 }
 
+
+/* SCROLL REVEAL ANIMATION */
+
+#gallery > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+#gallery > *.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #gallery > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
