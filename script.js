@@ -123,3 +123,77 @@ if (gallery && "IntersectionObserver" in window) {
   gallery.querySelectorAll(":scope > *")
     .forEach((photo) => photo.classList.add("is-visible"));
 }
+
+
+/* LIGHTBOX */
+
+.lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  padding: 65px 80px 35px;
+  margin: 0;
+  border: none;
+  background: #080808;
+  color: #f2f2f0;
+  text-align: center;
+}
+
+.lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.97);
+}
+
+#lightbox-image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 150px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.lightbox button {
+  position: absolute;
+  color: #f2f2f0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.lightbox-close {
+  top: 25px;
+  right: 35px;
+}
+
+.lightbox-prev {
+  top: 50%;
+  left: 30px;
+}
+
+.lightbox-next {
+  top: 50%;
+  right: 30px;
+}
+
+#lightbox-caption {
+  color: #999;
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+@media (max-width: 700px) {
+  .lightbox {
+    padding: 60px 15px 25px;
+  }
+
+  .lightbox-prev {
+    left: 10px;
+  }
+
+  .lightbox-next {
+    right: 10px;
+  }
+}
