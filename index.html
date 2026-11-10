@@ -1,76 +1,210 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Tony Dang — analog photographer based in Prague, Czech Republic.">
-  <meta name="theme-color" content="#f7f7f5">
-  <title>Tony Dang — Photographer</title>
+
+  <meta
+    name="description"
+    content="Tony Dang — analog photographer based in Prague, Czech Republic."
+  >
+
+  <meta name="theme-color" content="#080808">
+
+  <title>Tony Dang — Analog Photographer</title>
+
   <link rel="stylesheet" href="style.css">
+
   <script src="photos.js" defer></script>
   <script src="script.js" defer></script>
 </head>
+
 <body>
+
   <header class="site-header">
-    <a class="wordmark" href="#top" aria-label="Tony Dang, home">TONY DANG</a>
+
+    <a class="wordmark" href="#top" aria-label="Tony Dang, home">
+      TONY DANG
+    </a>
+
     <nav aria-label="Main navigation">
       <a href="#work">WORK</a>
       <a href="#about">ABOUT</a>
       <a href="#contact">CONTACT</a>
     </nav>
+
+    <span class="header-time" id="prague-time">
+      PRAGUE · --:--
+    </span>
+
   </header>
 
   <main id="top">
-    <section class="intro" aria-label="Introduction">
-      <p class="eyebrow">ANALOG PHOTOGRAPHER BASED IN PRAGUE, CZECH REPUBLIC</p>
 
-      <p class="intro-copy">Working exclusively with film, exploring fashion, portraiture and the relationship between people, atmosphere and space.</p>
+    <!-- INTRO -->
+
+    <section class="intro" aria-label="Introduction">
+
+      <p class="eyebrow">
+        ANALOG PHOTOGRAPHER BASED IN PRAGUE, CZECH REPUBLIC
+      </p>
+
+      <p class="intro-copy">
+        Working exclusively with film, exploring fashion, portraiture
+        and the relationship between people, atmosphere and space.
+      </p>
+
     </section>
 
-    <section id="work" class="work-section" aria-label="Selected photographs">
+    <!-- WORK -->
+
+    <section
+      id="work"
+      class="work-section"
+      aria-label="Selected photographs"
+    >
+
       <div class="section-heading">
-        <span>SELECTED</span>
+        <span>SELECTED WORK</span>
         <span id="photo-count">—</span>
       </div>
+
       <div id="gallery" class="gallery"></div>
+
       <p id="empty-state" class="empty-state" hidden>
-        Your photographs will appear here. Add image files to the <code>images</code> folder
-        and list them in <code>photos.js</code>.
+        Your photographs will appear here. Add image files to the
+        <code>images</code> folder and list them in <code>photos.js</code>.
       </p>
+
     </section>
+
+    <!-- ABOUT -->
 
     <section id="about" class="about-section">
-      <div class="section-heading"><span>ABOUT</span></div>
-      <div class="about-copy">
-        <h2>Tony Dang</h2>
-        <p>Tony is an analog photographer based in Prague. His work moves between fashion, portraiture and documentary photography, with an interest in atmosphere, human presence and the imperfections of analog film.
 
-Working exclusively with analog photography, he approaches each image with an appreciation for its physical process, unpredictability and slower pace.</p>
+      <div class="section-heading">
+        <span>ABOUT</span>
       </div>
+
+      <div class="about-copy">
+
+        <h2>Tony Dang</h2>
+
+        <p>
+          Tony is an analog photographer based in Prague. His work moves
+          between fashion, portraiture and documentary photography, with
+          an interest in atmosphere, human presence and the imperfections
+          of analog film.
+
+          Working exclusively with analog photography, he approaches each
+          image with an appreciation for its physical process,
+          unpredictability and slower pace.
+        </p>
+
+      </div>
+
     </section>
+
+    <!-- CONTACT -->
 
     <section id="contact" class="contact-section">
-      <div class="section-heading"><span>CONTACT</span></div>
-      <div class="contact-copy">
-        <p>For commissions, collaborations and inquiries.</p>
-        <a href="mailto:tondyno.info@gmail.com">EMAIL</a>
-        <a href="https:///www.instagram.com/tony_dang_/" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗</a>
+
+      <div class="section-heading">
+        <span>CONTACT</span>
       </div>
+
+      <div class="contact-editorial">
+
+        <h2 class="contact-heading">
+          Have a story<br>
+          in mind<span>?</span>
+        </h2>
+
+        <div class="contact-bottom">
+
+          <p class="contact-description">
+            For commissions, collaborations and inquiries.
+            Based in Prague, available worldwide.
+          </p>
+
+          <div class="contact-links">
+
+            <a href="mailto:tondyno.info@gmail.com">
+              EMAIL ↗
+            </a>
+
+            <a
+              href="https://www.instagram.com/tony_dang_/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              INSTAGRAM ↗
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
+
   </main>
 
+  <!-- FOOTER -->
+
   <footer class="site-footer">
+
     <span>TONY DANG</span>
+
     <span>PRAGUE · CZECH REPUBLIC</span>
+
     <span>© <span id="year"></span></span>
+
   </footer>
 
-  <dialog id="lightbox" class="lightbox" aria-label="Photograph preview">
-    <button class="lightbox-close" type="button" aria-label="Close preview">CLOSE ×</button>
-    <button class="lightbox-prev" type="button" aria-label="Previous photograph">←</button>
-    <img id="lightbox-image" src="" alt="">
-    <button class="lightbox-next" type="button" aria-label="Next photograph">→</button>
+  <!-- LIGHTBOX -->
+
+  <dialog
+    id="lightbox"
+    class="lightbox"
+    aria-label="Photograph preview"
+  >
+
+    <button
+      class="lightbox-close"
+      type="button"
+      aria-label="Close preview"
+    >
+      CLOSE ×
+    </button>
+
+    <button
+      class="lightbox-prev"
+      type="button"
+      aria-label="Previous photograph"
+    >
+      ←
+    </button>
+
+    <img
+      id="lightbox-image"
+      src=""
+      alt=""
+    >
+
+    <button
+      class="lightbox-next"
+      type="button"
+      aria-label="Next photograph"
+    >
+      →
+    </button>
+
     <p id="lightbox-caption"></p>
+
   </dialog>
+
 </body>
 </html>
