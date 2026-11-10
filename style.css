@@ -98,7 +98,7 @@ main {
 }
 
 .intro {
-  padding: clamp(110px, 17vw, 220px) 0 150px;
+  padding: clamp(65px, 9vw, 125px) 0 135px;
   max-width: 850px;
 }
 
