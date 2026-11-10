@@ -88,6 +88,9 @@ button {
 .header-time {
   justify-self: end;
   color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .12em;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -263,10 +266,11 @@ code {
 
 .contact-links a {
   display: inline-block;
-  padding-bottom: 6px;
+  padding-bottom: 8px;
   border-bottom: 1px solid #777;
-  font-size: 11px;
-  letter-spacing: .1em;
+  font-size: clamp(16px, 2vw, 22px);
+  letter-spacing: -.035em;
+  font-weight: 400;
   transition:
     color .25s ease,
     border-color .25s ease;
