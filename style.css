@@ -612,3 +612,25 @@ code {
   height: auto;
   object-fit: cover;
 }
+
+/* RED TEXT LABELS */
+
+.wordmark {
+  display: inline-block;
+  background-color: #e53935;
+  color: #ffffff;
+  padding: 7px 11px;
+}
+
+.contact-heading {
+  display: table;
+  width: fit-content;
+  background-color: #e53935;
+  color: #ffffff;
+  padding: 8px 14px;
+  line-height: 1.15;
+}
+
+.contact-heading span {
+  color: #ffffff;
+}
