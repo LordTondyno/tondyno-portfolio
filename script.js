@@ -20,6 +20,7 @@
   let touchStartY = 0;
 
   const failedPhotos = new Set();
+
   const reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
@@ -33,13 +34,14 @@
   function updateClock() {
     if (!clock) return;
 
-    clock.textContent = new Intl.DateTimeFormat("cs-CZ", {
-      timeZone: "Europe/Prague",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false
-    }).format(new Date());
+    clock.textContent = "PRAGUE · " +
+      new Intl.DateTimeFormat("cs-CZ", {
+        timeZone: "Europe/Prague",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      }).format(new Date());
   }
 
   updateClock();
@@ -80,8 +82,9 @@
 
     if (!available.length || !preview) return;
 
-    const selected = available.find(item => item.index === index)
-      || available[0];
+    const selected = available.find(
+      item => item.index === index
+    ) || available[0];
 
     activeIndex = selected.index;
 
@@ -96,7 +99,7 @@
       ) + 1;
 
       caption.textContent =
-        `${label(photo)}   —   ${String(position).padStart(2, "0")} / ${String(available.length).padStart(2, "0")}`;
+        `${label(photo)} — ${String(position).padStart(2, "0")} / ${String(available.length).padStart(2, "0")}`;
     }
   }
 
@@ -124,12 +127,60 @@
     }
   }
 
+  // IMAGE REVEAL
+  function prepareReveal(img, card) {
+    let isInView = false;
+    let isRevealed = false;
+    let isDecoding = false;
+
+    async function revealWhenReady() {
+      if (
+        !isInView ||
+        isRevealed ||
+        isDecoding ||
+        !img.complete ||
+        img.naturalWidth === 0
+      ) {
+        return;
+      }
+
+      isDecoding = true;
+
+      try {
+        if (img.decode) {
+          await img.decode();
+        }
+      } catch (error) {
+        // Image may already be decoded or browser may not support decode.
+      }
+
+      isDecoding = false;
+
+      if (!isInView || isRevealed) return;
+
+      isRevealed = true;
+      card.classList.add("is-visible");
+    }
+
+    img.addEventListener("load", revealWhenReady);
+
+    return {
+      enterView() {
+        isInView = true;
+        revealWhenReady();
+      }
+    };
+  }
+
   // BUILD GALLERY
+  const revealTargets = [];
+
   photos.forEach((photo, index) => {
     const button = document.createElement("button");
 
     button.className = "photo-card";
     button.type = "button";
+
     button.setAttribute(
       "aria-label",
       "Open photograph: " + label(photo)
@@ -139,14 +190,17 @@
 
     img.src = photo.src;
     img.alt = label(photo);
-    img.loading = "lazy";
     img.decoding = "async";
 
-    img.addEventListener("error", () => {
-      failedPhotos.add(index);
-      button.remove();
-      updateCount();
-    });
+    // Prioritize the first photograph.
+    if (index === 0) {
+      img.loading = "eager";
+      img.fetchPriority = "high";
+    } else if (index === 1) {
+      img.loading = "eager";
+    } else {
+      img.loading = "lazy";
+    }
 
     const meta = document.createElement("span");
     meta.className = "photo-caption";
@@ -160,34 +214,54 @@
     meta.append(title, photoYear);
     button.append(img, meta);
 
+    const reveal = prepareReveal(img, button);
+
     button.addEventListener("click", () => {
       openPhoto(index);
     });
 
+    img.addEventListener("error", () => {
+      failedPhotos.add(index);
+      button.remove();
+      updateCount();
+    });
+
     gallery.append(button);
+
+    revealTargets.push({
+      card: button,
+      reveal
+    });
   });
 
   updateCount();
 
-  // SCROLL REVEAL
+  // SCROLL-BASED REVEAL
   if (reducedMotion || !("IntersectionObserver" in window)) {
-    gallery.querySelectorAll(".photo-card").forEach(card => {
+    revealTargets.forEach(({ card }) => {
       card.classList.add("is-visible");
     });
   } else {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+        if (!entry.isIntersecting) return;
+
+        const target = revealTargets.find(
+          item => item.card === entry.target
+        );
+
+        if (target) {
+          target.reveal.enterView();
         }
+
+        observer.unobserve(entry.target);
       });
     }, {
-      threshold: 0.08,
-      rootMargin: "0px 0px 50px 0px"
+      threshold: 0.05,
+      rootMargin: "0px 0px 80px 0px"
     });
 
-    gallery.querySelectorAll(".photo-card").forEach(card => {
+    revealTargets.forEach(({ card }) => {
       observer.observe(card);
     });
   }
@@ -197,8 +271,10 @@
   const prevButton = document.querySelector(".lightbox-prev");
   const nextButton = document.querySelector(".lightbox-next");
 
-  if (closeButton) {
-    closeButton.addEventListener("click", () => dialog.close());
+  if (closeButton && dialog) {
+    closeButton.addEventListener("click", () => {
+      dialog.close();
+    });
   }
 
   if (prevButton) {
@@ -217,7 +293,9 @@
     });
 
     dialog.addEventListener("close", () => {
-      preview.removeAttribute("src");
+      if (preview) {
+        preview.removeAttribute("src");
+      }
     });
   }
 
