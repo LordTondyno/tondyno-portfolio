@@ -597,3 +597,18 @@ code {
     transition: none;
   }
 }
+
+/* HERO IMAGE */
+
+.hero {
+  width: var(--page);
+  margin: 0 auto 100px;
+  overflow: hidden;
+}
+
+.hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
