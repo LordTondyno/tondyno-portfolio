@@ -375,20 +375,32 @@ code {
   margin: 20px 0 0;
 }
 
-/* SCROLL REVEAL */
+
+/* SLOW EDITORIAL REVEAL */
 
 #gallery > * {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(30px);
   transition:
-    opacity .8s ease,
-    transform .8s ease;
+    opacity 1.3s cubic-bezier(.22, 1, .36, 1),
+    transform 1.3s cubic-bezier(.22, 1, .36, 1);
+  will-change: opacity, transform;
 }
 
 #gallery > *.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  #gallery > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
+
 
 /* TABLET */
 
