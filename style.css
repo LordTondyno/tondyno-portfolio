@@ -745,3 +745,44 @@ button {
     animation: none;
   }
 }
+
+/* LIGHTBOX PHOTO TRANSITIONS */
+
+#lightbox-image.photo-next {
+  animation: photoSlideNext 0.3s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+#lightbox-image.photo-prev {
+  animation: photoSlidePrev 0.3s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes photoSlideNext {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes photoSlidePrev {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #lightbox-image.photo-next,
+  #lightbox-image.photo-prev {
+    animation: none;
+  }
+}
