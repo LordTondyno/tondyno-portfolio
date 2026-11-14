@@ -85,7 +85,7 @@ let isClosing = false;
   }
 
   // LIGHTBOX
-  function showPhoto(index) {
+  function showPhoto(index, direction = 0) {
     const available = availablePhotos();
 
     if (!available.length || !preview) return;
@@ -98,8 +98,22 @@ let isClosing = false;
 
     const photo = selected.photo;
 
-    preview.src = photo.src;
-    preview.alt = label(photo);
+preview.classList.remove("photo-next", "photo-prev");
+
+if (direction !== 0) {
+  void preview.offsetWidth;
+
+  preview.classList.add(
+    direction > 0 ? "photo-next" : "photo-prev"
+  );
+
+  preview.addEventListener("animationend", () => {
+    preview.classList.remove("photo-next", "photo-prev");
+  }, { once: true });
+}
+
+preview.src = photo.src;
+preview.alt = label(photo);
 
     if (caption) {
       const position = available.findIndex(
@@ -124,7 +138,7 @@ let isClosing = false;
       current + direction + available.length
     ) % available.length;
 
-    showPhoto(available[next].index);
+  showPhoto(available[next].index, direction);
   }
 
 function openPhoto(index) {
