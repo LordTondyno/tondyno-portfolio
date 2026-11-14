@@ -22,9 +22,10 @@ for (let i = photos.length - 1; i > 0; i--) {
 
   if (!gallery) return;
 
-  let activeIndex = 0;
-  let touchStartX = 0;
-  let touchStartY = 0;
+ let activeIndex = 0;
+let touchStartX = 0;
+let touchStartY = 0;
+let isClosing = false;
 
   const failedPhotos = new Set();
 
@@ -126,13 +127,41 @@ for (let i = photos.length - 1; i > 0; i--) {
     showPhoto(available[next].index);
   }
 
-  function openPhoto(index) {
-    showPhoto(index);
+function openPhoto(index) {
+  if (isClosing) return;
 
-    if (dialog && !dialog.open) {
-      dialog.showModal();
-    }
+  showPhoto(index);
+
+  if (dialog && !dialog.open) {
+    dialog.classList.remove("is-closing");
+    dialog.showModal();
   }
+}
+
+// ANIMATED LIGHTBOX CLOSE
+function closeLightbox() {
+  if (!dialog || !dialog.open || isClosing) return;
+
+  isClosing = true;
+  dialog.classList.add("is-closing");
+
+  const finishClosing = () => {
+    if (!dialog.open) return;
+    dialog.close();
+  };
+
+  dialog.addEventListener("animationend", function onAnimationEnd(event) {
+    if (event.target !== dialog) return;
+
+    dialog.removeEventListener("animationend", onAnimationEnd);
+
+    if (dialog.classList.contains("is-closing")) {
+      finishClosing();
+    }
+  });
+
+  setTimeout(finishClosing, 500);
+}
 
   // IMAGE REVEAL
   function prepareReveal(img, card) {
@@ -273,38 +302,48 @@ for (let i = photos.length - 1; i > 0; i--) {
     });
   }
 
-  // LIGHTBOX CONTROLS
-  const closeButton = document.querySelector(".lightbox-close");
-  const prevButton = document.querySelector(".lightbox-prev");
-  const nextButton = document.querySelector(".lightbox-next");
+// LIGHTBOX CONTROLS
+const closeButton = document.querySelector(".lightbox-close");
+const prevButton = document.querySelector(".lightbox-prev");
+const nextButton = document.querySelector(".lightbox-next");
 
-  if (closeButton && dialog) {
-    closeButton.addEventListener("click", () => {
-      dialog.close();
-    });
-  }
+if (closeButton && dialog) {
+  closeButton.addEventListener("click", () => {
+    closeLightbox();
+  });
+}
 
-  if (prevButton) {
-    prevButton.addEventListener("click", () => navigate(-1));
-  }
+if (prevButton) {
+  prevButton.addEventListener("click", () => navigate(-1));
+}
 
-  if (nextButton) {
-    nextButton.addEventListener("click", () => navigate(1));
-  }
+if (nextButton) {
+  nextButton.addEventListener("click", () => navigate(1));
+}
 
-  if (dialog) {
-    dialog.addEventListener("click", event => {
-      if (event.target === dialog) {
-        dialog.close();
-      }
-    });
+if (dialog) {
+  // Click outside the photograph
+  dialog.addEventListener("click", event => {
+    if (event.target === dialog) {
+      closeLightbox();
+    }
+  });
 
-    dialog.addEventListener("close", () => {
-      if (preview) {
-        preview.removeAttribute("src");
-      }
-    });
-  }
+  // Escape key
+  dialog.addEventListener("cancel", event => {
+    event.preventDefault();
+    closeLightbox();
+  });
+
+  dialog.addEventListener("close", () => {
+    dialog.classList.remove("is-closing");
+    isClosing = false;
+
+    if (preview) {
+      preview.removeAttribute("src");
+    }
+  });
+}
 
   // KEYBOARD NAVIGATION
   document.addEventListener("keydown", event => {
