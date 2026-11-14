@@ -125,21 +125,23 @@ preview.alt = label(photo);
     }
   }
 
-  function navigate(direction) {
-    const available = availablePhotos();
+function navigate(direction) {
+  if (isClosing) return;
 
-    if (available.length < 2) return;
+  const available = availablePhotos();
 
-    const current = available.findIndex(
-      item => item.index === activeIndex
-    );
+  if (available.length < 2) return;
 
-    const next = (
-      current + direction + available.length
-    ) % available.length;
+  const current = available.findIndex(
+    item => item.index === activeIndex
+  );
+
+  const next = (
+    current + direction + available.length
+  ) % available.length;
 
   showPhoto(available[next].index, direction);
-  }
+}
 
 function openPhoto(index) {
   if (isClosing) return;
