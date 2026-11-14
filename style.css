@@ -689,3 +689,59 @@ button {
     animation: none;
   }
 }
+
+
+/* LIGHTBOX CLOSE ANIMATION */
+
+.lightbox.is-closing {
+  pointer-events: none;
+  animation: lightboxFadeOut 0.4s ease both;
+}
+
+.lightbox.is-closing img {
+  animation: photoZoomOut 0.4s cubic-bezier(.7, 0, .84, 0) both;
+}
+
+.lightbox.is-closing::backdrop {
+  animation: backdropFadeOut 0.4s ease both;
+}
+
+@keyframes lightboxFadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes photoZoomOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes backdropFadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox.is-closing,
+  .lightbox.is-closing img,
+  .lightbox.is-closing::backdrop {
+    animation: none;
+  }
+}
