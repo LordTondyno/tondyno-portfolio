@@ -1,8 +1,15 @@
 
 (() => {
-  const photos = Array.isArray(window.PORTFOLIO_PHOTOS)
-    ? window.PORTFOLIO_PHOTOS
-    : [];
+  // LOAD AND RANDOMIZE PHOTOS
+const photos = Array.isArray(window.PORTFOLIO_PHOTOS)
+  ? [...window.PORTFOLIO_PHOTOS]
+  : [];
+
+// Fisher-Yates shuffle
+for (let i = photos.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [photos[i], photos[j]] = [photos[j], photos[i]];
+}
 
   const gallery = document.getElementById("gallery");
   const count = document.getElementById("photo-count");
