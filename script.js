@@ -98,9 +98,12 @@ let isClosing = false;
 
     const photo = selected.photo;
 
+preview.src = photo.src;
+preview.alt = label(photo);
+
 preview.classList.remove("photo-next", "photo-prev");
 
-if (direction !== 0) {
+if (direction !== 0 && !reducedMotion) {
   void preview.offsetWidth;
 
   preview.classList.add(
@@ -111,9 +114,6 @@ if (direction !== 0) {
     preview.classList.remove("photo-next", "photo-prev");
   }, { once: true });
 }
-
-preview.src = photo.src;
-preview.alt = label(photo);
 
     if (caption) {
       const position = available.findIndex(
