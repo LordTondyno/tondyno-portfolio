@@ -626,13 +626,13 @@ code {
   display: table;
   width: fit-content;
   background-color: #e53935;
-  color: #ffffff;
+  color: #000000;
   padding: 8px 14px;
   line-height: 1.15;
 }
 
 .contact-heading span {
-  color: #ffffff;
+  color: #000000;
 }
 
 /* CUSTOM WHITE SQUARE CURSOR */
