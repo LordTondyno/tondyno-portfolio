@@ -758,7 +758,7 @@ button {
 
 @keyframes photoSlideNext {
   from {
-    opacity: 0;
+    opacity: 1;
     transform: translateX(24px);
   }
 
@@ -770,7 +770,7 @@ button {
 
 @keyframes photoSlidePrev {
   from {
-    opacity: 0;
+    opacity: 1;
     transform: translateX(-24px);
   }
 
