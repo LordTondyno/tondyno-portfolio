@@ -566,10 +566,14 @@ code {
     padding: 14px;
   }
 
-  .hero-overlay {
-    left: 18px;
-    bottom: 20px;
-    right: 18px;
+.hero-overlay {
+  right: 18px;
+  bottom: 20px;
+  left: 18px;
+  text-align: right;
+}
+    .hero {
+    margin-bottom: 45px;
   }
 
   .hero-eyebrow {
@@ -578,8 +582,8 @@ code {
   }
 
   .hero-copy {
-    font-size: 17px;
-    line-height: 1.35;
+    font-size: 15px;
+    line-height: 1.4;
   }
 
 }
