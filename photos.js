@@ -33,4 +33,11 @@ window.PORTFOLIO_PHOTOS = [
   { src: "images/@tondynoV2 (14).webp", title: "LILIANA FUJIFILM FP-100C", year: "2025" },
   { src: "images/@tondynoV2 (15).webp", title: "JULIE 600", year: "2026" },
   { src: "images/@tondynoV2 (16).webp", title: "MBPFW SS27 600", year: "2026" },
+  { src: "images/@tondynoV3 (1).webp", title: "VISION PRAGUE", year: "2026" },
+  { src: "images/@tondynoV3 (2).webp", title: "MBPFW SS27", year: "2026" },
+  { src: "images/@tondynoV3 (3).webp", title: "MBPFW SS26", year: "2025" },
+  { src: "images/@tondynoV3 (4).webp", title: "ANNA", year: "2025" },
+  { src: "images/@tondynoV3 (5).webp", title: "EMA", year: "2025" },
+  { src: "images/@tondynoV3 (6).webp", title: "TEREZA", year: "2025" },
+  { src: "images/@tondynoV3 (7).webp", title: "SHAKI", year: "2025" },
 ];
