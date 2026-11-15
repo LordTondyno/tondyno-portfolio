@@ -86,45 +86,63 @@ let isClosing = false;
   }
 
   // LIGHTBOX
-  function showPhoto(index, direction = 0) {
-    const available = availablePhotos();
+function showPhoto(index, direction = 0) {
+  const available = availablePhotos();
 
-    if (!available.length || !preview) return;
+  if (!available.length || !preview) return;
 
-    const selected = available.find(
-      item => item.index === index
-    ) || available[0];
+  const selected = available.find(
+    item => item.index === index
+  ) || available[0];
 
-    activeIndex = selected.index;
+  activeIndex = selected.index;
 
-    const photo = selected.photo;
+  const photo = selected.photo;
+  const token = ++photoLoadToken;
 
-preview.src = photo.src;
-preview.alt = label(photo);
+  if (caption) {
+    const position = available.findIndex(
+      item => item.index === activeIndex
+    ) + 1;
 
-preview.classList.remove("photo-next", "photo-prev");
-
-if (direction !== 0 && !reducedMotion) {
-  void preview.offsetWidth;
-
-  preview.classList.add(
-    direction > 0 ? "photo-next" : "photo-prev"
-  );
-
-  preview.addEventListener("animationend", () => {
-    preview.classList.remove("photo-next", "photo-prev");
-  }, { once: true });
-}
-
-    if (caption) {
-      const position = available.findIndex(
-        item => item.index === activeIndex
-      ) + 1;
-
-      caption.textContent =
-        `${label(photo)} — ${String(position).padStart(2, "0")} / ${String(available.length).padStart(2, "0")}`;
-    }
+    caption.textContent =
+      `${label(photo)} — ${String(position).padStart(2, "0")} / ${String(available.length).padStart(2, "0")}`;
   }
+
+  if (direction === 0 || reducedMotion) {
+    preview.classList.remove("photo-next", "photo-prev");
+    preview.src = photo.src;
+    preview.alt = label(photo);
+    return;
+  }
+
+  const preloader = new Image();
+
+  preloader.onload = () => {
+    if (token !== photoLoadToken) return;
+
+    preview.classList.remove("photo-next", "photo-prev");
+
+    preview.src = photo.src;
+    preview.alt = label(photo);
+
+    void preview.offsetWidth;
+
+    preview.classList.add(
+      direction > 0 ? "photo-next" : "photo-prev"
+    );
+  };
+
+  preloader.onerror = () => {
+    if (token !== photoLoadToken) return;
+
+    preview.classList.remove("photo-next", "photo-prev");
+    preview.src = photo.src;
+    preview.alt = label(photo);
+  };
+
+  preloader.src = photo.src;
+}
 
 function navigate(direction) {
   if (isClosing) return;
