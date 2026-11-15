@@ -85,6 +85,35 @@ let isClosing = false;
     }
   }
 
+  // POSITION LIGHTBOX ARROWS ON MOBILE
+
+function positionLightboxArrows() {
+  const prev = document.querySelector(".lightbox-prev");
+  const next = document.querySelector(".lightbox-next");
+
+  if (!preview || !dialog || !prev || !next) return;
+
+  if (!window.matchMedia("(max-width: 600px)").matches) {
+    prev.style.top = "";
+    next.style.top = "";
+    return;
+  }
+
+  const imageRect = preview.getBoundingClientRect();
+  const dialogRect = dialog.getBoundingClientRect();
+
+  if (!imageRect.height) return;
+
+  const center =
+    imageRect.top + imageRect.height / 2 - dialogRect.top;
+
+  prev.style.top = `${center}px`;
+  next.style.top = `${center}px`;
+}
+
+preview.addEventListener("load", positionLightboxArrows);
+window.addEventListener("resize", positionLightboxArrows);
+
   // LIGHTBOX
 function showPhoto(index, direction = 0) {
   const available = availablePhotos();
