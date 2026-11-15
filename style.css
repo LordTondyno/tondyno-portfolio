@@ -551,9 +551,13 @@ code {
     font-size: 9px;
   }
 
-  .lightbox {
-    padding: 65px 15px 35px;
-  }
+.lightbox {
+  padding: 65px 15px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
   .lightbox img {
     max-width: 100%;
