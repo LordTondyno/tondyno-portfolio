@@ -641,14 +641,14 @@ html,
 body,
 a,
 button {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='2' y='2' width='12' height='12' fill='white'/%3E%3C/svg%3E") 8 8, auto;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='2' y='2' width='12' height='12' fill='%23e53935'/%3E%3C/svg%3E") 8 8, auto;
 }
 
 /* KEEP WHITE SQUARE CURSOR ON PHOTOGRAPHS */
 
 .photo-card,
 .photo-card img {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='2' y='2' width='12' height='12' fill='white'/%3E%3C/svg%3E") 8 8, auto !important;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='2' y='2' width='12' height='12' fill='%23e53935'/%3E%3C/svg%3E") 8 8, auto !important;
 }
 
 /* LIGHTBOX OPEN ANIMATION */
