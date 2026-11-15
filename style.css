@@ -561,7 +561,7 @@ code {
 
   .lightbox img {
     max-width: 100%;
-    max-height: calc(100dvh - 125px);
+    max-height: calc(100dvh - 180px);
   }
 
   .lightbox-prev,
