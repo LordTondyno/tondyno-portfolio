@@ -23,6 +23,7 @@ for (let i = photos.length - 1; i > 0; i--) {
   if (!gallery) return;
 
  let activeIndex = 0;
+  let photoLoadToken = 0;
 let touchStartX = 0;
 let touchStartY = 0;
 let isClosing = false;
