@@ -621,11 +621,12 @@ code {
 
 .hero-overlay {
   position: absolute;
-  left: 45px;
+  right: 45px;
   bottom: 45px;
   z-index: 2;
   max-width: 600px;
   color: #ffffff;
+  text-align: right;
 }
 
 .hero-eyebrow {
