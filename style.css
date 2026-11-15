@@ -618,7 +618,7 @@ code {
 .wordmark {
   display: inline-block;
   background-color: #e53935;
-  color: #ffffff;
+  color: #000000;
   padding: 7px 11px;
 }
 
