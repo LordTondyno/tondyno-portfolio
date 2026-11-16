@@ -615,7 +615,7 @@ code {
 
 .hero {
   position: relative;
-  width: var(--page);
+  width: 100%;
   margin: 0 auto 100px;
   overflow: hidden;
 }
