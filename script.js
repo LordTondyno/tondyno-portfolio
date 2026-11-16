@@ -1,5 +1,30 @@
 
 (() => {
+  // DESKTOP SMOOTH SCROLL
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const isDesktop = window.matchMedia(
+    "(min-width: 601px)"
+  ).matches;
+
+  if (!prefersReducedMotion && isDesktop && window.Lenis) {
+    const lenis = new Lenis({
+      lerp: 0.1,
+      smoothWheel: true,
+      syncTouch: false,
+      anchors: true
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  }
+  
   // LOAD AND RANDOMIZE PHOTOS
 const photos = Array.isArray(window.PORTFOLIO_PHOTOS)
   ? [...window.PORTFOLIO_PHOTOS]
