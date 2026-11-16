@@ -1,5 +1,54 @@
 
 (() => {
+
+    // HERO SLIDESHOW
+
+  const heroSlideshow = document.querySelector(".hero-slideshow");
+
+  const heroPhotos = Array.isArray(window.HERO_PHOTOS)
+    ? window.HERO_PHOTOS
+    : [];
+
+  if (
+    heroSlideshow &&
+    heroPhotos.length > 1 &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    heroSlideshow.replaceChildren();
+
+    const slides = heroPhotos.map((src, index) => {
+      const img = document.createElement("img");
+
+      img.className = index === 0
+        ? "hero-slide active"
+        : "hero-slide";
+
+      img.src = src;
+      img.alt = "";
+      img.loading = "eager";
+      img.decoding = "async";
+
+      if (index === 0) {
+        img.fetchPriority = "high";
+      }
+
+      heroSlideshow.appendChild(img);
+
+      return img;
+    });
+
+    let activeIndex = 0;
+
+    window.setInterval(() => {
+      const nextIndex = (activeIndex + 1) % slides.length;
+
+      slides[activeIndex].classList.remove("active");
+      slides[nextIndex].classList.add("active");
+
+      activeIndex = nextIndex;
+    }, 5000);
+  }
+  
   // DESKTOP SMOOTH SCROLL
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
