@@ -7,6 +7,17 @@
 
   Název souboru musí přesně odpovídat názvu nahraného souboru.
 */
+
+window.HERO_PHOTOS = [
+  "images/@tondyno V4 (1).webp",
+  "images/@tondyno V4 (2).webp",
+  "images/@tondyno V4 (3).webp",
+  "images/@tondyno V4 (4).webp",
+  "images/@tondyno V4 (5).webp",
+  "images/@tondyno V4 (6).webp",
+  "images/@tondyno V4 (7).webp"
+];
+
 window.PORTFOLIO_PHOTOS = [  
   { src: "images/@tondnyo (2).webp", title: "WE'RE NEXT 26", year: "2026" },
   { src: "images/@tondnyo (4).webp", title: "MBPFW SS27", year: "2026" },
