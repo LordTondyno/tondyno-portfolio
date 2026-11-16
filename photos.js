@@ -9,6 +9,7 @@
 */
 
 window.HERO_PHOTOS = [
+  "images/hero.webp",
   "images/@tondyno V4 (1).webp",
   "images/@tondyno V4 (2).webp",
   "images/@tondyno V4 (3).webp",
