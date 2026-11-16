@@ -856,6 +856,7 @@ button {
 
 @media (max-width: 600px) {
   .hero {
+    width: var(--page);
     height: 70svh;
     min-height: 420px;
     max-height: 680px;
