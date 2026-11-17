@@ -357,6 +357,11 @@ code {
   transition: opacity .2s ease;
 }
 
+.lightbox-prev,
+.lightbox-next {
+  color: #e53935;
+}
+
 .lightbox-prev:hover,
 .lightbox-next:hover,
 .lightbox-close:hover {
