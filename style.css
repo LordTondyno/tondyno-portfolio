@@ -873,3 +873,18 @@ button {
     object-position: center 20%;
   }
 }
+
+/* MOBILE LIGHTBOX CENTERING */
+
+@media (max-width: 600px) {
+  .lightbox[open] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .lightbox img {
+    margin: 0 auto;
+  }
+}
