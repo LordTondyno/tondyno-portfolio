@@ -358,7 +358,8 @@ code {
 }
 
 .lightbox-prev,
-.lightbox-next {
+.lightbox-next,
+.lightbox-close {
   color: #e53935;
 }
 
