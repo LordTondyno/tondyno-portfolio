@@ -48,7 +48,7 @@ window.PORTFOLIO_PHOTOS = [
   { src: "images/@tondynoV3 (1).webp", title: "VISION PRAGUE", year: "2026" },
   { src: "images/@tondynoV3 (2).webp", title: "MBPFW SS27", year: "2026" },
   { src: "images/@tondynoV3 (3).webp", title: "MBPFW SS26", year: "2025" },
-  { src: "images/@tondynoV5 (1).webp", title: "BLACK SWAN", year: "2026" },
+  { src: "images/@tondyno V5 (1).webp", title: "BLACK SWAN", year: "2026" },
   { src: "images/@tondynoV3 (5).webp", title: "EMA", year: "2025" },
   { src: "images/@tondynoV3 (6).webp", title: "TEREZA", year: "2025" },
   { src: "images/@tondynoV3 (7).webp", title: "SHAKI", year: "2025" },
