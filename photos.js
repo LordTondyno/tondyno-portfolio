@@ -16,7 +16,8 @@ window.HERO_PHOTOS = [
   "images/@tondyno V4 (4).webp",
   "images/@tondyno V4 (5).webp",
   "images/@tondyno V4 (6).webp",
-  "images/@tondyno V4 (7).webp"
+  "images/@tondyno V4 (7).webp",
+  "images/@tondynoV2 (7).webp"
 ];
 
 window.PORTFOLIO_PHOTOS = [  
@@ -35,7 +36,6 @@ window.PORTFOLIO_PHOTOS = [
   { src: "images/@tondynoV2 (4).webp", title: "MBPFW SS27", year: "2026" },
   { src: "images/@tondynoV2 (5).webp", title: "PETR", year: "2025" },
   { src: "images/@tondynoV2 (6).webp", title: "JOHANA", year: "2026" },
-  { src: "images/@tondynoV2 (7).webp", title: "ALA", year: "2025" },
   { src: "images/@tondynoV2 (8).webp", title: "MBPFW SS27", year: "2026" },
   { src: "images/@tondynoV2 (9).webp", title: "MBPFW SS27", year: "2026" },
   { src: "images/@tondynoV2 (10).webp", title: "HUNG", year: "2026" },
