@@ -407,15 +407,15 @@
     img.alt = label(photo);
     img.decoding = "async";
 
-    // Prioritize the first photographs.
-    if (index === 0) {
-      img.loading = "eager";
-      img.fetchPriority = "high";
-    } else if (index === 1) {
-      img.loading = "eager";
-    } else {
-      img.loading = "eager";
-    }
+// Prioritize the first photographs.
+if (index === 0) {
+  img.loading = "eager";
+  img.fetchPriority = "high";
+} else if (index === 1) {
+  img.loading = "eager";
+} else {
+  img.loading = "lazy";
+}
 
     const meta = document.createElement("span");
     meta.className = "photo-caption";
