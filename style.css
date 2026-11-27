@@ -894,3 +894,11 @@ button {
     margin: 0 auto;
   }
 }
+
+/* SCROLL PERFORMANCE TEST */
+
+#gallery > * {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
