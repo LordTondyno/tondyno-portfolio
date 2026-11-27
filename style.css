@@ -893,3 +893,10 @@ button {
   transform: none !important;
   transition: none !important;
 }
+
+
+/* TEMPORARY GALLERY DIAGNOSTIC */
+
+#gallery {
+  display: none !important;
+}
