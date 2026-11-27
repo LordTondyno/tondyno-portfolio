@@ -599,8 +599,8 @@ const img = document.createElement("img");
 
 img.alt = label(photo);
 img.decoding = "async";
-img.width = 1200;
-img.height = 1600;
+img.style.width = "100%";
+img.style.height = "auto";
 
     // Prioritize the first two photographs.
 
