@@ -61,7 +61,7 @@
   ).matches;
 
   // Lenis is temporarily disabled for performance testing.
-  if (false && !prefersReducedMotion && isDesktop && window.Lenis) {
+  if (!prefersReducedMotion && isDesktop && window.Lenis) {
     const lenis = new Lenis({
       lerp: 0.1,
       smoothWheel: true,
