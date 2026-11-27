@@ -474,10 +474,10 @@ if (index === 0) {
 
         observer.unobserve(entry.target);
       });
-    }, {
-      threshold: 0.05,
-      rootMargin: "0px 0px 1000px 0px"
-    });
+  }, {
+    threshold: 0,
+    rootMargin: "0px 0px 1400px 0px"
+  });
 
     revealTargets.forEach(({ card }) => {
       observer.observe(card);
