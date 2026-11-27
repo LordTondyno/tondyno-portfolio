@@ -143,6 +143,7 @@
   }
 
 
+
   // ==========================================
   // LENIS SMOOTH SCROLL
   // ==========================================
@@ -151,27 +152,38 @@
     "(min-width: 601px)"
   ).matches;
 
-if (
-  false &&
-  !prefersReducedMotion &&
-  isDesktop &&
-  window.Lenis
-) {
+  if (
+    !prefersReducedMotion &&
+    isDesktop &&
+    window.Lenis
+  ) {
     const lenis = new Lenis({
-      lerp: 0.075,
+      lerp: 0.1,
       smoothWheel: true,
-      wheelMultiplier: 0.9,
+      wheelMultiplier: 0.85,
       syncTouch: false,
       anchors: true
     });
 
+    let rafId;
+
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else {
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(raf);
+      }
+    });
   }
+
 
 
   // ==========================================
