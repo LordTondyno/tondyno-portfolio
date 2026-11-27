@@ -632,9 +632,19 @@ img.src = photo.src;
 
     const reveal = prepareReveal(img, button);
 
-    button.addEventListener("click", () => {
-      openPhoto(index);
-    });
+button.addEventListener("mouseenter", () => {
+  const fullSrc = photo.fullSrc || photo.src;
+
+  const preloader = new Image();
+  preloader.src = fullSrc;
+});
+
+button.addEventListener("touchstart", () => {
+  const fullSrc = photo.fullSrc || photo.src;
+
+  const preloader = new Image();
+  preloader.src = fullSrc;
+}, { passive: true });
 
     img.addEventListener("error", () => {
       failedPhotos.add(index);
