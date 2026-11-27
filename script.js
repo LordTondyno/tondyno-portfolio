@@ -62,12 +62,13 @@
 
   // Lenis is temporarily disabled for performance testing.
   if (!prefersReducedMotion && isDesktop && window.Lenis) {
-    const lenis = new Lenis({
-      lerp: 0.1,
-      smoothWheel: true,
-      syncTouch: false,
-      anchors: true
-    });
+const lenis = new Lenis({
+  lerp: 0.075,
+  smoothWheel: true,
+  wheelMultiplier: 0.9,
+  syncTouch: false,
+  anchors: true
+});
 
     function raf(time) {
       lenis.raf(time);
