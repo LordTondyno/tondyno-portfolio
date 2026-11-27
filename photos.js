@@ -1,11 +1,8 @@
 
 /*
-  SEM PŘIDÁVEJ SVÉ FOTOGRAFIE.
-  1. Nahraj WebP fotografie do složky images/
-  2. Doplň nový řádek podle vzoru:
-     { src: "images/nazev-souboru.webp", title: "Název série", year: "2026" },
-
-  Název souboru musí přesně odpovídat názvu nahraného souboru.
+  FOTOGRAFIE
+  Originály: images/
+  Optimalizované kopie galerie: images/optimized/
 */
 
 window.HERO_PHOTOS = [
@@ -20,7 +17,7 @@ window.HERO_PHOTOS = [
   "images/@tondynoV2 (7).webp"
 ];
 
-window.PORTFOLIO_PHOTOS = [  
+window.PORTFOLIO_PHOTOS = [
   { src: "images/@tondnyo (2).webp", title: "WE'RE NEXT 26", year: "2026" },
   { src: "images/@tondnyo (4).webp", title: "MBPFW SS27", year: "2026" },
   { src: "images/@tondnyo (5).webp", title: "MBPFW SS27", year: "2026" },
@@ -51,5 +48,12 @@ window.PORTFOLIO_PHOTOS = [
   { src: "images/@tondyno V5 (1).webp", title: "BLACK SWAN", year: "2026" },
   { src: "images/@tondynoV3 (5).webp", title: "EMA", year: "2025" },
   { src: "images/@tondynoV3 (6).webp", title: "TEREZA", year: "2025" },
-  { src: "images/@tondynoV3 (7).webp", title: "SHAKI", year: "2025" },
+  { src: "images/@tondynoV3 (7).webp", title: "SHAKI", year: "2025" }
 ];
+
+// Uložení originálů a přepnutí galerie na optimalizované kopie
+window.PORTFOLIO_PHOTOS = window.PORTFOLIO_PHOTOS.map(photo => ({
+  ...photo,
+  fullSrc: photo.src,
+  src: photo.src.replace(/^images\//, "images/optimized/")
+}));
