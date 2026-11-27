@@ -367,77 +367,80 @@
   // LIGHTBOX
   // ==========================================
 
-  function showPhoto(index, direction = 0) {
-    const available = availablePhotos();
 
-    if (!available.length || !preview) return;
+function showPhoto(index, direction = 0) {
+  const available = availablePhotos();
 
-    const selected = available.find(
-      item => item.index === index
-    ) || available[0];
+  if (!available.length || !preview) return;
 
-    activeIndex = selected.index;
+  const selected = available.find(
+    item => item.index === index
+  ) || available[0];
 
-    const photo = selected.photo;
-    const token = ++photoLoadToken;
+  activeIndex = selected.index;
 
-    if (caption) {
-      const position = available.findIndex(
-        item => item.index === activeIndex
-      ) + 1;
+  const photo = selected.photo;
+  const fullSrc = photo.fullSrc || photo.src;
+  const token = ++photoLoadToken;
 
-      caption.textContent =
-        `${label(photo)} — ${String(position).padStart(2, "0")} / ${String(available.length).padStart(2, "0")}`;
-    }
+  if (caption) {
+    const position = available.findIndex(
+      item => item.index === activeIndex
+    ) + 1;
 
-    if (direction === 0 || reducedMotion) {
-      preview.classList.remove(
-        "photo-next",
-        "photo-prev"
-      );
-
-      preview.src = photo.src;
-      preview.alt = label(photo);
-
-      return;
-    }
-
-    const preloader = new Image();
-
-    preloader.onload = () => {
-      if (token !== photoLoadToken) return;
-
-      preview.classList.remove(
-        "photo-next",
-        "photo-prev"
-      );
-
-      preview.src = photo.src;
-      preview.alt = label(photo);
-
-      void preview.offsetWidth;
-
-      preview.classList.add(
-        direction > 0
-          ? "photo-next"
-          : "photo-prev"
-      );
-    };
-
-    preloader.onerror = () => {
-      if (token !== photoLoadToken) return;
-
-      preview.classList.remove(
-        "photo-next",
-        "photo-prev"
-      );
-
-      preview.src = photo.src;
-      preview.alt = label(photo);
-    };
-
-    preloader.src = photo.src;
+    caption.textContent =
+      `${label(photo)} — ${String(position).padStart(2, "0")} / ${String(available.length).padStart(2, "0")}`;
   }
+
+  if (direction === 0 || reducedMotion) {
+    preview.classList.remove(
+      "photo-next",
+      "photo-prev"
+    );
+
+    preview.src = fullSrc;
+    preview.alt = label(photo);
+
+    return;
+  }
+
+  const preloader = new Image();
+
+  preloader.onload = () => {
+    if (token !== photoLoadToken) return;
+
+    preview.classList.remove(
+      "photo-next",
+      "photo-prev"
+    );
+
+    preview.src = fullSrc;
+    preview.alt = label(photo);
+
+    void preview.offsetWidth;
+
+    preview.classList.add(
+      direction > 0
+        ? "photo-next"
+        : "photo-prev"
+    );
+  };
+
+  preloader.onerror = () => {
+    if (token !== photoLoadToken) return;
+
+    preview.classList.remove(
+      "photo-next",
+      "photo-prev"
+    );
+
+    preview.src = fullSrc;
+    preview.alt = label(photo);
+  };
+
+  preloader.src = fullSrc;
+}
+
 
 
   // ==========================================
