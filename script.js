@@ -417,13 +417,11 @@ function closeLightbox() {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
 
-        const target = revealTargets.find(
-          item => item.card === entry.target
-        );
+    const reveal = revealTargets.get(entry.target);
 
-        if (target) {
-          target.reveal.enterView();
-        }
+    if (reveal) {
+    reveal.enterView();
+}
 
         observer.unobserve(entry.target);
       });
