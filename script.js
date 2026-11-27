@@ -602,18 +602,12 @@ img.decoding = "async";
 img.style.width = "100%";
 img.style.height = "auto";
 
-    // Prioritize the first two photographs.
+// Controlled image loading
 
-    if (index === 0) {
-      img.loading = "eager";
-      img.fetchPriority = "high";
-    } else if (index === 1) {
-      img.loading = "eager";
-    } else {
-      img.loading = "lazy";
-    }
+img.loading = index < 3 ? "eager" : "lazy";
+img.fetchPriority = index === 0 ? "high" : "auto";
 
-    img.src = photo.src;
+img.src = photo.src;
 
     const meta = document.createElement("span");
 
