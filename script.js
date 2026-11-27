@@ -402,10 +402,7 @@ function closeLightbox() {
 
     gallery.append(button);
 
-    revealTargets.push({
-      card: button,
-      reveal
-    });
+    revealTargets.set(button, reveal);
   });
 
   updateCount();
