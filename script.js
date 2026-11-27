@@ -347,7 +347,7 @@ function closeLightbox() {
   }
 
   // BUILD GALLERY
-  const revealTargets = [];
+  const revealTargets = new Map();
 
   photos.forEach((photo, index) => {
     const button = document.createElement("button");
