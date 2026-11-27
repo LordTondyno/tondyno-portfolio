@@ -414,7 +414,7 @@
     } else if (index === 1) {
       img.loading = "eager";
     } else {
-      img.loading = "lazy";
+      img.loading = "eager";
     }
 
     const meta = document.createElement("span");
