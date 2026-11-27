@@ -58,7 +58,7 @@
     "(min-width: 601px)"
   ).matches;
 
-  if (!prefersReducedMotion && isDesktop && window.Lenis) {
+  if (false && !prefersReducedMotion && isDesktop && window.Lenis) {
     const lenis = new Lenis({
       lerp: 0.1,
       smoothWheel: true,
