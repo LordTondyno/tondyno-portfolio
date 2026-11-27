@@ -595,10 +595,12 @@
       "Open photograph: " + label(photo)
     );
 
-    const img = document.createElement("img");
+const img = document.createElement("img");
 
-    img.alt = label(photo);
-    img.decoding = "async";
+img.alt = label(photo);
+img.decoding = "async";
+img.width = 1200;
+img.height = 1600;
 
     // Prioritize the first two photographs.
 
