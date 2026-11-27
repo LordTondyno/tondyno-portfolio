@@ -1,7 +1,9 @@
 
 (() => {
 
+  // ==========================================
   // HERO SLIDESHOW
+  // ==========================================
 
   const heroSlideshow = document.querySelector(".hero-slideshow");
 
@@ -9,10 +11,14 @@
     ? window.HERO_PHOTOS
     : [];
 
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
   if (
     heroSlideshow &&
     heroPhotos.length > 1 &&
-    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    !prefersReducedMotion
   ) {
     heroSlideshow.replaceChildren();
 
@@ -23,14 +29,15 @@
         ? "hero-slide active"
         : "hero-slide";
 
-      img.src = src;
       img.alt = "";
-      img.loading = "eager";
       img.decoding = "async";
+      img.loading = "eager";
 
       if (index === 0) {
         img.fetchPriority = "high";
       }
+
+      img.src = src;
 
       heroSlideshow.appendChild(img);
 
@@ -40,7 +47,8 @@
     let heroActiveIndex = 0;
 
     window.setInterval(() => {
-      const nextIndex = (heroActiveIndex + 1) % slides.length;
+      const nextIndex =
+        (heroActiveIndex + 1) % slides.length;
 
       slides[heroActiveIndex].classList.remove("active");
       slides[nextIndex].classList.add("active");
@@ -50,25 +58,26 @@
   }
 
 
-  // DESKTOP SMOOTH SCROLL
-
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+  // ==========================================
+  // LENIS SMOOTH SCROLL
+  // ==========================================
 
   const isDesktop = window.matchMedia(
     "(min-width: 601px)"
   ).matches;
 
-  // Lenis is temporarily disabled for performance testing.
-  if (!prefersReducedMotion && isDesktop && window.Lenis) {
-const lenis = new Lenis({
-  lerp: 0.075,
-  smoothWheel: true,
-  wheelMultiplier: 0.9,
-  syncTouch: false,
-  anchors: true
-});
+  if (
+    !prefersReducedMotion &&
+    isDesktop &&
+    window.Lenis
+  ) {
+    const lenis = new Lenis({
+      lerp: 0.075,
+      smoothWheel: true,
+      wheelMultiplier: 0.9,
+      syncTouch: false,
+      anchors: true
+    });
 
     function raf(time) {
       lenis.raf(time);
@@ -79,39 +88,52 @@ const lenis = new Lenis({
   }
 
 
+  // ==========================================
   // LOAD AND RANDOMIZE PHOTOS
+  // ==========================================
 
   const photos = Array.isArray(window.PORTFOLIO_PHOTOS)
     ? [...window.PORTFOLIO_PHOTOS]
     : [];
 
   // Fisher-Yates shuffle
+
   for (let i = photos.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [photos[i], photos[j]] = [photos[j], photos[i]];
+
+    [photos[i], photos[j]] =
+      [photos[j], photos[i]];
   }
 
 
+  // ==========================================
   // ELEMENTS
+  // ==========================================
 
   const gallery = document.getElementById("gallery");
   const count = document.getElementById("photo-count");
   const empty = document.getElementById("empty-state");
+
   const dialog = document.getElementById("lightbox");
   const preview = document.getElementById("lightbox-image");
   const caption = document.getElementById("lightbox-caption");
+
   const year = document.getElementById("year");
   const clock = document.getElementById("prague-time");
 
   if (!gallery) return;
 
 
+  // ==========================================
   // STATE
+  // ==========================================
 
   let activeIndex = 0;
   let photoLoadToken = 0;
+
   let touchStartX = 0;
   let touchStartY = 0;
+
   let isClosing = false;
 
   const failedPhotos = new Set();
@@ -121,19 +143,24 @@ const lenis = new Lenis({
   ).matches;
 
 
+  // ==========================================
   // YEAR
+  // ==========================================
 
   if (year) {
     year.textContent = new Date().getFullYear();
   }
 
 
+  // ==========================================
   // PRAGUE CLOCK
+  // ==========================================
 
   function updateClock() {
     if (!clock) return;
 
-    clock.textContent = "PRAGUE · " +
+    clock.textContent =
+      "PRAGUE · " +
       new Intl.DateTimeFormat("cs-CZ", {
         timeZone: "Europe/Prague",
         hour: "2-digit",
@@ -150,7 +177,9 @@ const lenis = new Lenis({
   }
 
 
+  // ==========================================
   // PHOTO LABEL
+  // ==========================================
 
   function label(photo) {
     return [
@@ -160,16 +189,23 @@ const lenis = new Lenis({
   }
 
 
+  // ==========================================
   // AVAILABLE PHOTOS
+  // ==========================================
 
   function availablePhotos() {
     return photos
-      .map((photo, index) => ({ photo, index }))
+      .map((photo, index) => ({
+        photo,
+        index
+      }))
       .filter(item => !failedPhotos.has(item.index));
   }
 
 
+  // ==========================================
   // UPDATE PHOTO COUNT
+  // ==========================================
 
   function updateCount() {
     if (count) {
@@ -184,13 +220,17 @@ const lenis = new Lenis({
   }
 
 
-  // POSITION LIGHTBOX ARROWS ON MOBILE
+  // ==========================================
+  // LIGHTBOX ARROW POSITION
+  // ==========================================
 
   function positionLightboxArrows() {
     const prev = document.querySelector(".lightbox-prev");
     const next = document.querySelector(".lightbox-next");
 
-    if (!preview || !dialog || !prev || !next) return;
+    if (!preview || !dialog || !prev || !next) {
+      return;
+    }
 
     if (!window.matchMedia("(max-width: 600px)").matches) {
       prev.style.top = "";
@@ -204,20 +244,30 @@ const lenis = new Lenis({
     if (!imageRect.height) return;
 
     const center =
-      imageRect.top + imageRect.height / 2 - dialogRect.top;
+      imageRect.top +
+      imageRect.height / 2 -
+      dialogRect.top;
 
     prev.style.top = `${center}px`;
     next.style.top = `${center}px`;
   }
 
   if (preview) {
-    preview.addEventListener("load", positionLightboxArrows);
+    preview.addEventListener(
+      "load",
+      positionLightboxArrows
+    );
   }
 
-  window.addEventListener("resize", positionLightboxArrows);
+  window.addEventListener(
+    "resize",
+    positionLightboxArrows
+  );
 
 
+  // ==========================================
   // LIGHTBOX
+  // ==========================================
 
   function showPhoto(index, direction = 0) {
     const available = availablePhotos();
@@ -243,9 +293,14 @@ const lenis = new Lenis({
     }
 
     if (direction === 0 || reducedMotion) {
-      preview.classList.remove("photo-next", "photo-prev");
+      preview.classList.remove(
+        "photo-next",
+        "photo-prev"
+      );
+
       preview.src = photo.src;
       preview.alt = label(photo);
+
       return;
     }
 
@@ -254,7 +309,10 @@ const lenis = new Lenis({
     preloader.onload = () => {
       if (token !== photoLoadToken) return;
 
-      preview.classList.remove("photo-next", "photo-prev");
+      preview.classList.remove(
+        "photo-next",
+        "photo-prev"
+      );
 
       preview.src = photo.src;
       preview.alt = label(photo);
@@ -262,14 +320,20 @@ const lenis = new Lenis({
       void preview.offsetWidth;
 
       preview.classList.add(
-        direction > 0 ? "photo-next" : "photo-prev"
+        direction > 0
+          ? "photo-next"
+          : "photo-prev"
       );
     };
 
     preloader.onerror = () => {
       if (token !== photoLoadToken) return;
 
-      preview.classList.remove("photo-next", "photo-prev");
+      preview.classList.remove(
+        "photo-next",
+        "photo-prev"
+      );
+
       preview.src = photo.src;
       preview.alt = label(photo);
     };
@@ -278,7 +342,9 @@ const lenis = new Lenis({
   }
 
 
+  // ==========================================
   // LIGHTBOX NAVIGATION
+  // ==========================================
 
   function navigate(direction) {
     if (isClosing) return;
@@ -291,15 +357,17 @@ const lenis = new Lenis({
       item => item.index === activeIndex
     );
 
-    const next = (
-      current + direction + available.length
-    ) % available.length;
+    const next =
+      (current + direction + available.length) %
+      available.length;
 
     showPhoto(available[next].index, direction);
   }
 
 
+  // ==========================================
   // OPEN PHOTO
+  // ==========================================
 
   function openPhoto(index) {
     if (isClosing) return;
@@ -313,34 +381,48 @@ const lenis = new Lenis({
   }
 
 
+  // ==========================================
   // ANIMATED LIGHTBOX CLOSE
+  // ==========================================
 
   function closeLightbox() {
-    if (!dialog || !dialog.open || isClosing) return;
+    if (!dialog || !dialog.open || isClosing) {
+      return;
+    }
 
     isClosing = true;
+
     dialog.classList.add("is-closing");
 
     const finishClosing = () => {
       if (!dialog.open) return;
+
       dialog.close();
     };
 
-    dialog.addEventListener("animationend", function onAnimationEnd(event) {
-      if (event.target !== dialog) return;
+    dialog.addEventListener(
+      "animationend",
+      function onAnimationEnd(event) {
+        if (event.target !== dialog) return;
 
-      dialog.removeEventListener("animationend", onAnimationEnd);
+        dialog.removeEventListener(
+          "animationend",
+          onAnimationEnd
+        );
 
-      if (dialog.classList.contains("is-closing")) {
-        finishClosing();
+        if (dialog.classList.contains("is-closing")) {
+          finishClosing();
+        }
       }
-    });
+    );
 
     window.setTimeout(finishClosing, 500);
   }
 
 
+  // ==========================================
   // IMAGE REVEAL
+  // ==========================================
 
   function prepareReveal(img, card) {
     let isInView = false;
@@ -365,31 +447,44 @@ const lenis = new Lenis({
           await img.decode();
         }
       } catch (error) {
-        // Image may already be decoded or browser may not support decode.
+        // Continue if the browser cannot decode explicitly.
       }
 
       isDecoding = false;
 
-      if (!isInView || isRevealed) return;
+      if (
+        !isInView ||
+        isRevealed ||
+        img.naturalWidth === 0
+      ) {
+        return;
+      }
 
       isRevealed = true;
+
       card.classList.add("is-visible");
     }
 
-    img.addEventListener("load", revealWhenReady);
+    img.addEventListener(
+      "load",
+      revealWhenReady
+    );
 
     return {
       enterView() {
         isInView = true;
+
         revealWhenReady();
       }
     };
   }
 
 
+  // ==========================================
   // BUILD GALLERY
+  // ==========================================
 
-  const revealTargets = [];
+  const revealTargets = new Map();
 
   photos.forEach((photo, index) => {
     const button = document.createElement("button");
@@ -404,30 +499,38 @@ const lenis = new Lenis({
 
     const img = document.createElement("img");
 
-    img.src = photo.src;
     img.alt = label(photo);
     img.decoding = "async";
 
-// Prioritize the first photographs.
-if (index === 0) {
-  img.loading = "eager";
-  img.fetchPriority = "high";
-} else if (index === 1) {
-  img.loading = "eager";
-} else {
-  img.loading = "lazy";
-}
+    // Prioritize the first two photographs.
+
+    if (index === 0) {
+      img.loading = "eager";
+      img.fetchPriority = "high";
+    } else if (index === 1) {
+      img.loading = "eager";
+    } else {
+      img.loading = "lazy";
+    }
+
+    img.src = photo.src;
 
     const meta = document.createElement("span");
+
     meta.className = "photo-caption";
 
     const title = document.createElement("span");
-    title.textContent = photo.title || "Untitled";
+
+    title.textContent =
+      photo.title || "Untitled";
 
     const photoYear = document.createElement("span");
-    photoYear.textContent = photo.year || "";
+
+    photoYear.textContent =
+      photo.year || "";
 
     meta.append(title, photoYear);
+
     button.append(img, meta);
 
     const reveal = prepareReveal(img, button);
@@ -438,58 +541,76 @@ if (index === 0) {
 
     img.addEventListener("error", () => {
       failedPhotos.add(index);
+
       button.remove();
+
+      revealTargets.delete(button);
+
       updateCount();
     });
 
     gallery.append(button);
 
-    revealTargets.push({
-      card: button,
-      reveal
-    });
+    revealTargets.set(button, reveal);
   });
 
   updateCount();
 
 
+  // ==========================================
   // SCROLL-BASED REVEAL
+  // ==========================================
 
-  if (reducedMotion || !("IntersectionObserver" in window)) {
-    revealTargets.forEach(({ card }) => {
+  if (
+    reducedMotion ||
+    !("IntersectionObserver" in window)
+  ) {
+    revealTargets.forEach((reveal, card) => {
       card.classList.add("is-visible");
     });
+
   } else {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
 
-        const target = revealTargets.find(
-          item => item.card === entry.target
-        );
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
 
-        if (target) {
-          target.reveal.enterView();
-        }
+          const reveal = revealTargets.get(
+            entry.target
+          );
 
-        observer.unobserve(entry.target);
-      });
-  }, {
-    threshold: 0,
-    rootMargin: "0px 0px 1400px 0px"
-  });
+          if (reveal) {
+            reveal.enterView();
+          }
 
-    revealTargets.forEach(({ card }) => {
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: "0px 0px 800px 0px"
+      }
+    );
+
+    revealTargets.forEach((reveal, card) => {
       observer.observe(card);
     });
   }
 
 
+  // ==========================================
   // LIGHTBOX CONTROLS
+  // ==========================================
 
-  const closeButton = document.querySelector(".lightbox-close");
-  const prevButton = document.querySelector(".lightbox-prev");
-  const nextButton = document.querySelector(".lightbox-next");
+  const closeButton =
+    document.querySelector(".lightbox-close");
+
+  const prevButton =
+    document.querySelector(".lightbox-prev");
+
+  const nextButton =
+    document.querySelector(".lightbox-next");
 
   if (closeButton && dialog) {
     closeButton.addEventListener("click", () => {
@@ -498,19 +619,26 @@ if (index === 0) {
   }
 
   if (prevButton) {
-    prevButton.addEventListener("click", () => navigate(-1));
+    prevButton.addEventListener("click", () => {
+      navigate(-1);
+    });
   }
 
   if (nextButton) {
-    nextButton.addEventListener("click", () => navigate(1));
+    nextButton.addEventListener("click", () => {
+      navigate(1);
+    });
   }
 
 
+  // ==========================================
   // LIGHTBOX EVENTS
+  // ==========================================
 
   if (dialog) {
 
-    // Click outside the photograph
+    // Click outside photograph
+
     dialog.addEventListener("click", event => {
       if (event.target === dialog) {
         closeLightbox();
@@ -518,13 +646,16 @@ if (index === 0) {
     });
 
     // Escape key
+
     dialog.addEventListener("cancel", event => {
       event.preventDefault();
+
       closeLightbox();
     });
 
     dialog.addEventListener("close", () => {
       dialog.classList.remove("is-closing");
+
       isClosing = false;
 
       if (preview) {
@@ -534,45 +665,66 @@ if (index === 0) {
   }
 
 
+  // ==========================================
   // KEYBOARD NAVIGATION
+  // ==========================================
 
   document.addEventListener("keydown", event => {
     if (!dialog || !dialog.open) return;
 
     if (event.key === "ArrowLeft") {
       event.preventDefault();
+
       navigate(-1);
     }
 
     if (event.key === "ArrowRight") {
       event.preventDefault();
+
       navigate(1);
     }
   });
 
 
+  // ==========================================
   // MOBILE SWIPE
+  // ==========================================
 
   if (dialog && preview) {
-    dialog.addEventListener("touchstart", event => {
-      touchStartX = event.changedTouches[0].screenX;
-      touchStartY = event.changedTouches[0].screenY;
-    }, { passive: true });
 
-    dialog.addEventListener("touchend", event => {
-      const endX = event.changedTouches[0].screenX;
-      const endY = event.changedTouches[0].screenY;
+    dialog.addEventListener(
+      "touchstart",
+      event => {
+        touchStartX =
+          event.changedTouches[0].screenX;
 
-      const diffX = endX - touchStartX;
-      const diffY = endY - touchStartY;
+        touchStartY =
+          event.changedTouches[0].screenY;
+      },
+      { passive: true }
+    );
 
-      if (
-        Math.abs(diffX) > 55 &&
-        Math.abs(diffX) > Math.abs(diffY)
-      ) {
-        navigate(diffX < 0 ? 1 : -1);
-      }
-    }, { passive: true });
+    dialog.addEventListener(
+      "touchend",
+      event => {
+        const endX =
+          event.changedTouches[0].screenX;
+
+        const endY =
+          event.changedTouches[0].screenY;
+
+        const diffX = endX - touchStartX;
+        const diffY = endY - touchStartY;
+
+        if (
+          Math.abs(diffX) > 55 &&
+          Math.abs(diffX) > Math.abs(diffY)
+        ) {
+          navigate(diffX < 0 ? 1 : -1);
+        }
+      },
+      { passive: true }
+    );
   }
 
 })();
