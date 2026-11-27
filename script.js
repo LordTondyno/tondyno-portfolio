@@ -631,6 +631,9 @@ img.src = photo.src;
     button.append(img, meta);
 
     const reveal = prepareReveal(img, button);
+    button.addEventListener("click", () => {
+  openPhoto(index);
+});
 
 button.addEventListener("mouseenter", () => {
   const fullSrc = photo.fullSrc || photo.src;
