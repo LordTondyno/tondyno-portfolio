@@ -894,9 +894,3 @@ button {
   transition: none !important;
 }
 
-
-/* TEMPORARY GALLERY DIAGNOSTIC */
-
-#gallery {
-  display: none !important;
-}
