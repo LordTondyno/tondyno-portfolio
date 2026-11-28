@@ -525,60 +525,13 @@ function showPhoto(index, direction = 0) {
   // IMAGE REVEAL
   // ==========================================
 
-  function prepareReveal(img, card) {
-    let isInView = false;
-    let isRevealed = false;
-    let isDecoding = false;
-
-    async function revealWhenReady() {
-      if (
-        !isInView ||
-        isRevealed ||
-        isDecoding ||
-        !img.complete ||
-        img.naturalWidth === 0
-      ) {
-        return;
-      }
-
-      isDecoding = true;
-
-      try {
-        if (img.decode) {
-          await img.decode();
-        }
-      } catch (error) {
-        // Continue if the browser cannot decode explicitly.
-      }
-
-      isDecoding = false;
-
-      if (
-        !isInView ||
-        isRevealed ||
-        img.naturalWidth === 0
-      ) {
-        return;
-      }
-
-      isRevealed = true;
-
+function prepareReveal(img, card) {
+  return {
+    enterView() {
       card.classList.add("is-visible");
     }
-
-    img.addEventListener(
-      "load",
-      revealWhenReady
-    );
-
-    return {
-      enterView() {
-        isInView = true;
-
-        revealWhenReady();
-      }
-    };
-  }
+  };
+}
 
 
   // ==========================================
@@ -699,7 +652,7 @@ button.addEventListener("touchstart", () => {
       },
       {
         threshold: 0,
-        rootMargin: "0px 0px 800px 0px"
+        rootMargin: "0px 0px 150px 0px"
       }
     );
 
